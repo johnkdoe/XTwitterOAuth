@@ -32,7 +32,7 @@ I've tested it under XCode 4.5 and iOS 5.1.1 on device.
 * added XTwitterDanieleMarguttiCopyright.h to most files that had his original confusing copyright
 * remove the "don't compile with ARC" flag from the NSString+
 * fixed some member name manglings (i.e. hanlder to handler, completition to completion)
-* changed project/class/filename prefixes from DM to H
+* changed project/class/filename prefixes from DM to X
 
 
 ### May 13, 2012
