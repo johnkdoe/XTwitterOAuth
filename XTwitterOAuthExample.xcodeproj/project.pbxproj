@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A062994164B7D5F008CDACF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		2A062994164B7D5F008CDACF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2A06299C164B9A1D008CDACF /* XTwitterOAuthMultiPartMITOpenSourceCopyright.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTwitterOAuthMultiPartMITOpenSourceCopyright.h; sourceTree = "<group>"; };
 		2A39B23E164BB839004C8153 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		2A39B23F164BB839004C8153 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };

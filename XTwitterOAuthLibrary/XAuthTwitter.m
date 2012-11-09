@@ -13,10 +13,6 @@
 
 @interface XAuthTwitter()
 {
-    NSString*						user_id;
-    NSString*						screen_name;
-    
-    XTwitterLoginViewController*	currentLoginController;
     UINavigationController*			navigationController;
 }
 
@@ -24,23 +20,20 @@
 
 @implementation XAuthTwitter
 
-@synthesize screen_name, user_id;
-@synthesize currentLoginController;
-
 - (BOOL)newLoginSessionFrom:(UIViewController *)parentController
 				   progress:(XOTwitterLoginCurrentStatus)currentProgress
 				 completion:(XOTwitterLoginResult)completion
 {
     // we have already an opened session, or current login session is already authenticated
 	// (in this case, use logout)
-    if (currentLoginController != nil || self.oauth_token_authorized) return NO;
+    if (_currentLoginController != nil || self.oauth_token_authorized) return NO;
 
-    currentLoginController
+    _currentLoginController
 	  = [[XTwitterLoginViewController alloc] initWithOAuthSession:self
 												  progressHandler:currentProgress
 												completionHandler:completion];
     navigationController
-	  = [[UINavigationController alloc] initWithRootViewController:currentLoginController];
+	  = [[UINavigationController alloc] initWithRootViewController:_currentLoginController];
     [parentController presentModalViewController:navigationController animated:YES];
     return YES;
 }
@@ -209,10 +202,10 @@
     self.user_id = nil;
 	self.screen_name = nil;
     
-    if (currentLoginController != nil)
+    if (_currentLoginController != nil)
 	{
-        [currentLoginController dismissModalViewControllerAnimated:YES];
-        currentLoginController = nil;
+        [_currentLoginController dismissModalViewControllerAnimated:YES];
+        _currentLoginController = nil;
         navigationController = nil;
     }
     [super resetState];
