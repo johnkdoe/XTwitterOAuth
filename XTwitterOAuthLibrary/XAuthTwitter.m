@@ -70,8 +70,8 @@
     self.oauth_token_secret = nil;
     
     // Calculate the header.
-    // Guard against someone forgetting to set the callback. Pretend that we have out-of-band request
-    // in that case.
+    // Guard against someone forgetting to set the callback. Pretend that we have out-of-band
+	// requestin that case.
     NSString *_callbackUrl = callbackUrl;
     if (!callbackUrl)
         _callbackUrl = @"oob";
@@ -96,25 +96,24 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request
                                          returningResponse:&response
                                                      error:&error];
-    NSString *responseString
-	  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if ([response statusCode] != 200) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            tokenReqResult(nil,response,error);
-        });
+    if ([response statusCode] != 200)
+	{
+        dispatch_async(dispatch_get_main_queue(), ^{ tokenReqResult(nil, response, error); });
     }
 	else
 	{
-        NSArray *responseBodyComponents = [responseString componentsSeparatedByString:@"&"];
-        // For a successful response, break the response down into pieces and set the properties
+		NSString* responseString
+		  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+		NSArray *responseBodyComponents = [responseString componentsSeparatedByString:@"&"];
+		// For a successful response, break the response down into pieces and set the properties
 		// with KVC. If there's a response for which there is no local property or ivar, this
 		// may end up with setValue:forUndefinedKey:.
-        for (NSString *component in responseBodyComponents) {
-            NSArray *subcomponents = [component componentsSeparatedByString:@"="];
-            [self setValue:[subcomponents objectAtIndex:1] forKey:[subcomponents objectAtIndex:0]];
-        }
+		for (NSString *component in responseBodyComponents) {
+			NSArray *subcomponents = [component componentsSeparatedByString:@"="];
+			[self setValue:[subcomponents objectAtIndex:1] forKey:[subcomponents objectAtIndex:0]];
+		}
         dispatch_async(dispatch_get_main_queue(), ^{
-            tokenReqResult(self.oauth_token,response,nil);
+            tokenReqResult(responseString, response, nil);
         });
     }
 }
